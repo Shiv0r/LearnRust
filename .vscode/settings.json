@@ -1,0 +1,16 @@
+{
+    "rust-analyzer.cargo.path": "/Users/edwagwi/.cargo/bin/cargo",
+    "rust-analyzer.runnables.extraEnv": {
+        "PATH": "/Users/edwagwi/.cargo/bin:${env:PATH}"
+    },
+    "terminal.integrated.env.osx": {
+        "PATH": "/Users/edwagwi/.cargo/bin:${env:PATH}"
+    },
+    "terminal.integrated.profiles.osx": {
+        "zsh": {
+            "path": "/bin/zsh",
+            "args": ["-l"]
+        }
+    },
+    "terminal.integrated.defaultProfile.osx": "zsh"
+}
