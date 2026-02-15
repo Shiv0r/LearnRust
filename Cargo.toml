@@ -1,3 +1,11 @@
+[workspace]
+members = [
+    "hello_cargo",
+    "hello_world",
+    "guessing_game",
+]
+resolver = "2"
+
 [package]
 name = "LearnRust"
 version = "0.1.0"
