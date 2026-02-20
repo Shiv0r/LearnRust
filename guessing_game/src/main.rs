@@ -24,9 +24,11 @@ enum Role {
 impl UserData {
     fn process_winner(&self) {
         match self {
-            UserData::Npc(state) => println!("{} won with the number {}", state.name, state.number),
+            UserData::Npc(state) => {
+                println!("{} won with the number {}.", state.name, state.number)
+            }
             UserData::Pc(state) => {
-                println!("{}, you won with the number {}", state.name, state.number)
+                println!("{}, you won with the number {}!", state.name, state.number)
             }
             UserData::HiddenNumber(state) => println!("{} is the hidden number!", state.number),
         }
@@ -34,10 +36,13 @@ impl UserData {
     fn process_loser(&self) {
         match self {
             UserData::Pc(state) => {
-                println!("{}, you lost. with the number {}", state.name, state.number)
+                println!(
+                    "{}, you lost. with the number {}. :<",
+                    state.name, state.number
+                )
             }
             UserData::Npc(state) => {
-                println!("{} lost with the number {}", state.name, state.number)
+                println!("{} lost with the number {}.", state.name, state.number)
             }
             UserData::HiddenNumber(_) => print!(""),
         }
