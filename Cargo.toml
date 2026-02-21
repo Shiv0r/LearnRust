@@ -2,7 +2,7 @@
 members = [
     "hello_cargo",
     "hello_world",
-    "guessing_game",
+    "guessing_game", "contact_fomular",
 ]
 resolver = "2"
 
