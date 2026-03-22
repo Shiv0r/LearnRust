@@ -13,7 +13,7 @@ pub enum DataSelector<'a> {
     Street(&'a str),
     PostalCode(u16),
     City(&'a str),
-    County(&'a str),
+    Country(&'a str),
 }
 
 #[derive(Debug)]
@@ -77,7 +77,7 @@ impl UserData {
             DataSelector::City(new_city) => {
                 self.location.city = new_city.to_string();
             }
-            DataSelector::County(new_country) => {
+            DataSelector::Country(new_country) => {
                 self.location.country = new_country.to_string();
             }
         }
