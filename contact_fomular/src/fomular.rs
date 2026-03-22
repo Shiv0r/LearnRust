@@ -1,5 +1,6 @@
 use crate::input::*;
 use crate::user::*;
+use uuid::Uuid;
 
 
 pub fn fill_fomular() {
@@ -12,6 +13,10 @@ pub fn fill_fomular() {
     fill_postal_code(&mut user);
     fill_city(&mut user);
     fill_country(&mut user);
+}
+
+fn generateId(user: &mut UserData) {
+    user.set_data(DataSelector::Id(Uuid::new_v4()));
 }
 
 

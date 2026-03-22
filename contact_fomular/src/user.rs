@@ -1,13 +1,15 @@
+use uuid::Uuid;
+
 #[derive(Debug)]
 pub struct UserData {
-    id: String,
+    id: Uuid,
     name: String,
     age: u8,
     location: Location,
 }
 
 pub enum DataSelector<'a> {
-    Id(&'a str),
+    Id(Uuid),
     Name(&'a str),
     Age(u8),
     Street(&'a str),
@@ -27,7 +29,7 @@ pub struct Location {
 impl UserData {
     pub fn new() -> Self {
         UserData {
-            id: String::new(),
+            id: Uuid::new_v4(),
             name: String::new(),
             age: 0,
             location: Location {
@@ -38,8 +40,8 @@ impl UserData {
             },
         }
     }
-    pub fn get_data_id(&self) -> &str {
-        &self.id.as_str()
+    pub fn get_data_id(&self) -> &Uuid {
+        &self.id
     }
     pub fn get_data_name(&self) -> &str {
         &self.name.as_str()
@@ -60,7 +62,7 @@ impl UserData {
     pub fn set_data(&mut self, data: DataSelector) {
         match data {
             DataSelector::Id(new_id) => {
-                self.id = new_id.to_string();
+                self.id = new_id;
             }
             DataSelector::Name(new_name) => {
                 self.name = new_name.to_string();
