@@ -27,14 +27,14 @@ pub struct Location {
 impl UserData {
     pub fn new() -> Self {
         UserData {
-            id: "".to_string(),
-            name: "".to_string(),
+            id: String::new(),
+            name: String::new(),
             age: 0,
             location: Location {
-                street: "".to_string(),
-                city: "".to_string(),
+                street: String::new(),
+                city: String::new(),
                 postal_code: 0,
-                country: "".to_string(),
+                country: String::new(),
             },
         }
     }

@@ -1,6 +1,7 @@
 use crate::input::*;
 use crate::user::*;
 
+
 pub fn fill_fomular() {
     let mut user = UserData::new();
 
@@ -12,6 +13,7 @@ pub fn fill_fomular() {
     fill_city(&mut user);
     fill_country(&mut user);
 }
+
 
 fn fill_name(user: &mut UserData) {
     let mut input_name = String::new();
