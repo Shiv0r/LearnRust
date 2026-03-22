@@ -1,6 +1,6 @@
 use crate::user::*;
 
-use std::io::{self};
+use std::io::{self, Write};
 
 enum TypeSelector<'a> {
     U8Select(&'a mut String),
@@ -55,12 +55,14 @@ impl TypeSelector<'_> {
     }
 }
 
-fn input_data_string(message: &str, input_data: &mut String) -> Option<String> {
+pub fn input_data_string(message: &str, input_data: &mut String) -> Option<String> {
     let input_result;
     loop {
         let input = io::stdin();
 
-        println!("{}", message);
+        print!("{}", message);
+        io::stdout().flush().unwrap();
+
         input.read_line(input_data).unwrap();
 
         let input_data_string: TypeSelector<'_> = TypeSelector::StringSelect(input_data);
@@ -88,12 +90,14 @@ fn input_data_string(message: &str, input_data: &mut String) -> Option<String> {
     Some(input_result)
 }
 
-fn input_data_u8(message: &str, input_data: &mut String) -> Option<u8> {
+pub fn input_data_u8(message: &str, input_data: &mut String) -> Option<u8> {
     let input_result: u8;
     loop {
         let input = io::stdin();
 
-        println!("{}", message);
+        print!("{}", message);
+        io::stdout().flush().unwrap();
+
         input.read_line(input_data).unwrap();
 
         let input_data_u8: TypeSelector<'_> = TypeSelector::U8Select(input_data);
@@ -102,7 +106,9 @@ fn input_data_u8(message: &str, input_data: &mut String) -> Option<u8> {
             return None;
         }
 
-        match input_data_u8.u8_validate("Your input is not a valid number in range of 0 - 255") {
+        match input_data_u8
+            .u8_validate("<Err> Your input is not a valid number in range of 0 - 255")
+        {
             TypeSelector::U8Set(input) => {
                 input_result = input;
                 break;
@@ -121,12 +127,14 @@ fn input_data_u8(message: &str, input_data: &mut String) -> Option<u8> {
     Some(input_result)
 }
 
-fn input_data_u16(message: &str, input_data: &mut String) -> Option<u16> {
+pub fn input_data_u16(message: &str, input_data: &mut String) -> Option<u16> {
     let input_result: u16;
     loop {
         let input = io::stdin();
 
-        println!("{}", message);
+        print!("{}", message);
+        io::stdout().flush().unwrap();
+
         input.read_line(input_data).unwrap();
 
         let input_data_u16 = TypeSelector::U16Select(input_data);
@@ -135,7 +143,8 @@ fn input_data_u16(message: &str, input_data: &mut String) -> Option<u16> {
             return None;
         }
 
-        match input_data_u16.u16_validate("Your input is not a valid number in range of 0 - 65.536")
+        match input_data_u16
+            .u16_validate("<Err> Your input is not a valid number in range of 0 - 65.536")
         {
             TypeSelector::U16Set(input) => {
                 input_result = input;
