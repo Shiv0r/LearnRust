@@ -5,7 +5,7 @@ use std::sync::Mutex;
 
 static DB: Mutex<Vec<UserData>> = Mutex::new(Vec::new());
 
-enum Db {
+pub enum Db {
     User(UserData),
 }
 
