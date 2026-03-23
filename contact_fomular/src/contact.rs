@@ -17,7 +17,7 @@ pub fn welcome_message() {
     println!();
 
     println!("\nWelcome to the contact formular v0.0.1");
-    println!("Make sure to answer all question to complete the contact formular.");
+    println!("Make sure to answer all question to complete the contact formular.\n\n");
 }
 
 pub fn bye_message() {

@@ -1,7 +1,8 @@
+use crate::db::Db;
+use crate::db::select_user;
 use crate::input::*;
 use crate::user::*;
 use uuid::Uuid;
-
 
 pub fn fill_fomular() {
     let mut user = UserData::new();
@@ -13,18 +14,24 @@ pub fn fill_fomular() {
     fill_postal_code(&mut user);
     fill_city(&mut user);
     fill_country(&mut user);
+
+    let db_user = Db::User(user);
+
+    db_user.save();
+    let user_id = select_user();
+
+    println!("{}", user_id);
 }
 
 fn generateId(user: &mut UserData) {
     user.set_data(DataSelector::Id(Uuid::new_v4()));
 }
 
-
 fn fill_name(user: &mut UserData) {
     let mut input_name = String::new();
     let message_name = "Please enter your name(for- and lastname): ";
     let name = input_data_string(message_name, &mut input_name);
-    user.set_data(DataSelector::Name(name.as_deref().unwrap()));
+    user.set_data(DataSelector::Name(name.as_deref().unwrap().trim()));
 }
 
 fn fill_age(user: &mut UserData) {

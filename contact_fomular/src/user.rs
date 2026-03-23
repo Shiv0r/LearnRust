@@ -40,8 +40,8 @@ impl UserData {
             },
         }
     }
-    pub fn get_data_id(&self) -> &Uuid {
-        &self.id
+    pub fn get_data_id(&self) -> Uuid {
+        self.id
     }
     pub fn get_data_name(&self) -> &str {
         &self.name.as_str()
