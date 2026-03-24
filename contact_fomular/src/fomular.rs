@@ -4,7 +4,7 @@ use crate::input::*;
 use crate::user::*;
 use uuid::Uuid;
 
-pub fn fill_fomular() {
+pub fn create_fomular() {
     let mut user = UserData::new();
 
     fill_name(&mut user);
@@ -16,7 +16,6 @@ pub fn fill_fomular() {
     fill_country(&mut user);
 
     let db_user = Db::User(user);
-
     db_user.save();
     let user_id = select_user();
 
@@ -45,14 +44,14 @@ fn fill_street(user: &mut UserData) {
     let mut input_street = String::new();
     let message_street = "Please enter your street and street number: ";
     let street = input_data_string(message_street, &mut input_street);
-    user.set_data(DataSelector::Street(street.as_deref().unwrap()));
+    user.set_data(DataSelector::Street(street.as_deref().unwrap().trim()));
 }
 
 fn fill_city(user: &mut UserData) {
     let mut input_city = String::new();
     let message_city = "Please enter your city: ";
     let city = input_data_string(message_city, &mut input_city);
-    user.set_data(DataSelector::City(city.as_deref().unwrap()));
+    user.set_data(DataSelector::City(city.as_deref().unwrap().trim()));
 }
 
 fn fill_postal_code(user: &mut UserData) {
@@ -66,5 +65,5 @@ fn fill_country(user: &mut UserData) {
     let mut input_country = String::new();
     let message_country = "Please enter your country: ";
     let country = input_data_string(message_country, &mut input_country);
-    user.set_data(DataSelector::Country(country.as_deref().unwrap()));
+    user.set_data(DataSelector::Country(country.as_deref().unwrap().trim()));
 }

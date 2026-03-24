@@ -8,6 +8,14 @@ pub struct UserData {
     location: Location,
 }
 
+#[derive(Debug)]
+pub struct Location {
+    street: String,
+    city: String,
+    postal_code: u16,
+    country: String,
+}
+
 pub enum DataSelector<'a> {
     Id(Uuid),
     Name(&'a str),
@@ -16,14 +24,6 @@ pub enum DataSelector<'a> {
     PostalCode(u16),
     City(&'a str),
     Country(&'a str),
-}
-
-#[derive(Debug)]
-pub struct Location {
-    street: String,
-    city: String,
-    postal_code: u16,
-    country: String,
 }
 
 impl UserData {

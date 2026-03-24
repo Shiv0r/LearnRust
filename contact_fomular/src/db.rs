@@ -21,7 +21,7 @@ impl Db {
     }
 
     pub fn delete(self) -> UserData {
-        let mut db: std::sync::MutexGuard<'_, Vec<UserData>> = DB.lock().unwrap();
+        let mut db = DB.lock().unwrap();
         match self {
             Db::User(user) => {
                 is_db_empty();
