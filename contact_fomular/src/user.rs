@@ -1,6 +1,6 @@
 use uuid::Uuid;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct UserData {
     id: Uuid,
     name: String,
@@ -8,7 +8,7 @@ pub struct UserData {
     location: Location,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Location {
     street: String,
     city: String,
@@ -57,6 +57,9 @@ impl UserData {
     }
     pub fn get_data_city(&self) -> &str {
         &mut self.location.city.as_str()
+    }
+    pub fn get_data_country(&self) -> &str {
+        &mut self.location.country.as_str()
     }
 
     pub fn set_data(&mut self, data: DataSelector) {

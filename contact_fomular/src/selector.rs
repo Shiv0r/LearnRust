@@ -8,7 +8,7 @@ pub fn select_instruction() {
 
     match instruction_number {
         1 => create_fomular(),
-        2 => return, // edit
+        2 => edit_fomular(),
         3 => return, // delete
         _ => return,
     }

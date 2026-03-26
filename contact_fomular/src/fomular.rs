@@ -1,25 +1,85 @@
+use std::io::Write;
+use std::io::stdout;
+
 use crate::db::Db;
+use crate::db::get_user;
 use crate::db::select_user;
 use crate::input::*;
 use crate::user::*;
 use uuid::Uuid;
 
+enum Mode {
+    Create(UserData),
+    Edit(UserData),
+}
+
 pub fn create_fomular() {
     let mut user = UserData::new();
 
-    fill_name(&mut user);
-    fill_age(&mut user);
-
-    fill_street(&mut user);
-    fill_postal_code(&mut user);
-    fill_city(&mut user);
-    fill_country(&mut user);
+    user = fill_fomular(Mode::Create(user));
+    let user_name = user.get_data_id();
 
     let db_user = Db::User(user);
     db_user.save();
-    let user_id = select_user();
 
-    println!("{}", user_id);
+    println!("The user {} was created.", user_name);
+}
+
+pub fn edit_fomular() {
+    let user_id = select_user();
+    let user = get_user(user_id);
+
+    let db_user = Db::User(user);
+    let target_user = db_user.delete();
+
+    let edited_user = fill_fomular(Mode::Edit(target_user));
+    let user_name = edited_user.get_data_name().to_string();
+    let new_db_user = Db::User(edited_user);
+    new_db_user.save();
+
+    println!(
+        "The user {} was edited and saved to the database.",
+        user_name
+    );
+}
+
+fn fill_fomular(mode: Mode) -> UserData {
+    match mode {
+        Mode::Create(mut user) => {
+            fill_name(&mut user);
+            fill_age(&mut user);
+            fill_street(&mut user);
+            fill_postal_code(&mut user);
+            fill_city(&mut user);
+            fill_country(&mut user);
+
+            return user;
+        }
+        Mode::Edit(mut user) => {
+            println!("Current name: {} | Edit to:", user.get_data_name());
+            fill_name(&mut user);
+
+            println!("Current age: {} | Edit to:", user.get_data_age());
+            fill_age(&mut user);
+
+            println!("Current street: {} | Edit to:", user.get_data_street());
+            fill_street(&mut user);
+
+            println!(
+                "Current postal code: {} | Edit to:",
+                user.get_data_postal_code()
+            );
+            fill_postal_code(&mut user);
+
+            println!("Current city: {} | Edit to:", user.get_data_city());
+            fill_city(&mut user);
+
+            println!("Current country: {} | Edit to:", user.get_data_country());
+            fill_country(&mut user);
+
+            return user;
+        }
+    }
 }
 
 fn generateId(user: &mut UserData) {

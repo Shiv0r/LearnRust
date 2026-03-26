@@ -64,14 +64,14 @@ pub fn select_user() -> Uuid {
         println!("Total amount of user: {}", db.len());
         println!("Pls select the user:");
         for (index, user) in db.iter().enumerate() {
-            println!("[{}]-({})", user.get_data_name(), index + 1);
+            println!("[{}] - ({})", user.get_data_name(), index + 1);
         }
         input.read_line(&mut input_user).unwrap();
 
         match input_user.trim().parse::<u32>() {
             Ok(user_index) => {
                 if user_index <= db.len().try_into().unwrap() && user_index != 0 {
-                    index = user_index - 1;
+                    index = (user_index - 1) as usize;
                     break;
                 } else {
                     error_message(
@@ -89,5 +89,16 @@ pub fn select_user() -> Uuid {
         }
     }
 
-    db[index as usize].get_data_id()
+    db[index].get_data_id()
+}
+
+pub fn get_user(id: Uuid) -> UserData {
+    let db = DB.lock().unwrap();
+
+    for user in db.iter() {
+        if user.get_data_id() == id {
+            return user.clone();
+        }
+    }
+    panic!("User not found");
 }
