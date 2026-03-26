@@ -1,4 +1,4 @@
-use crate::user::*;
+use crate::{input, user::*};
 
 use std::io::{self};
 use std::sync::Mutex;
@@ -24,8 +24,6 @@ impl Db {
         let mut db = DB.lock().unwrap();
         match self {
             Db::User(user) => {
-                is_db_empty();
-
                 if let Some(index) = db
                     .iter()
                     .position(|db_user| user.get_data_id() == db_user.get_data_id())
@@ -47,9 +45,10 @@ fn is_db_empty() {
     }
 }
 
-fn error_message(message: &str, mut input_user: String) {
+fn error_message(message: &str, mut input_user: String) -> String {
     println!("{}", message);
     input_user.clear();
+    input_user
 }
 
 pub fn select_user() -> Uuid {
@@ -74,14 +73,14 @@ pub fn select_user() -> Uuid {
                     index = (user_index - 1) as usize;
                     break;
                 } else {
-                    error_message(
+                    input_user = error_message(
                         "<Err> Please enter a valid number to select the user",
                         input_user,
                     );
                 }
             }
             Err(_) => {
-                error_message(
+                input_user = error_message(
                     "<Err> Please enter a valid number to select the user",
                     input_user,
                 );

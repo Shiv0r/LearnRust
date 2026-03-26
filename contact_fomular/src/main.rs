@@ -13,6 +13,11 @@ use crate::user::*;
 
 fn main() {
     welcome_message();
-    select_instruction();
+    loop {
+        let should_run = select_instruction();
+        if !should_run {
+            break;
+        }
+    }
     bye_message();
 }

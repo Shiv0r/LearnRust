@@ -1,16 +1,23 @@
 use crate::fomular::*;
 use std::io::*;
 
-const INSTRUCTIONS: [&str; 3] = ["create", "edit", "delete"];
+const INSTRUCTIONS: [&str; 4] = ["create", "edit", "delete", "exit"];
 
-pub fn select_instruction() {
+pub fn select_instruction() -> bool {
     let instruction_number = input_selector().unwrap();
 
     match instruction_number {
-        1 => create_fomular(),
-        2 => edit_fomular(),
-        3 => return, // delete
-        _ => return,
+        1 => {
+            create_fomular();
+            return true;
+        }
+        2 => {
+            edit_fomular();
+            return true;
+        }
+        3 => return true, // delete
+        4 => return false,
+        _ => return false,
     }
 }
 
