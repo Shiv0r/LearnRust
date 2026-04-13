@@ -1,7 +1,7 @@
 use crate::fomular::*;
 use std::io::*;
 
-const INSTRUCTIONS: [&str; 4] = ["create", "edit", "delete", "exit"];
+const INSTRUCTIONS: [&str; 5] = ["create", "edit", "delete", "show", "exit"];
 
 pub fn select_instruction() -> bool {
     let instruction_number = input_selector().unwrap();
@@ -15,8 +15,15 @@ pub fn select_instruction() -> bool {
             edit_fomular();
             return true;
         }
-        3 => return true, // delete
-        4 => return false,
+        3 => {
+            delete_entry();
+            return true;
+        }
+        4 => {
+            show_entry();
+            return true;
+        }
+        5 => return false,
         _ => return false,
     }
 }
@@ -60,6 +67,6 @@ fn input_selector() -> Option<u8> {
 
 fn display_instructions() {
     for (index, &instruction) in INSTRUCTIONS.iter().enumerate() {
-        println!("[{}] - ({})", instruction, index + 1);
+        println!("[{:^8}] - ({})", instruction, index + 1);
     }
 }

@@ -17,7 +17,7 @@ pub fn create_fomular() {
     let mut user = UserData::new();
 
     user = fill_fomular(Mode::Create(user));
-    let user_name = user.get_data_id();
+    let user_name = user.get_data_name().to_string();
 
     let db_user = Db::User(user);
     db_user.save();
@@ -41,6 +41,40 @@ pub fn edit_fomular() {
         "The user {} was edited and saved to the database.",
         user_name
     );
+}
+
+pub fn delete_entry() {
+    let user_id = select_user();
+    let user = get_user(user_id);
+
+    let db_user = Db::User(user);
+    let removed_user = db_user.delete();
+
+    println!("The user {} was deleted.", removed_user.get_data_name());
+}
+
+pub fn show_entry() {
+    let user_id = select_user();
+    let user = get_user(user_id);
+
+    print_user(user);
+}
+
+fn print_user(user: UserData) {
+    let user_infos = [
+        DataSelector::Name(user.get_data_name()),
+        DataSelector::Age(*user.get_data_age()),
+        DataSelector::Street(user.get_data_street()),
+        DataSelector::PostalCode(*user.get_data_postal_code()),
+        DataSelector::City(user.get_data_city()),
+        DataSelector::Country(user.get_data_country()),
+    ];
+
+    println!("\n\n");
+    for info in user_infos {
+        println!("{:?}", info);
+    }
+    println!("\n\n");
 }
 
 fn fill_fomular(mode: Mode) -> UserData {

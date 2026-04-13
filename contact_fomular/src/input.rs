@@ -1,5 +1,3 @@
-use crate::user::*;
-
 use std::io::{self, Write};
 
 enum TypeSelector<'a> {

@@ -15,7 +15,7 @@ pub struct Location {
     postal_code: u16,
     country: String,
 }
-
+#[derive(Debug)]
 pub enum DataSelector<'a> {
     Id(Uuid),
     Name(&'a str),
