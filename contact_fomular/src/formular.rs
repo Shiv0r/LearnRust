@@ -1,6 +1,3 @@
-use std::io::Write;
-use std::io::stdout;
-
 use crate::db::Db;
 use crate::db::get_user;
 use crate::db::select_user;
@@ -13,10 +10,10 @@ enum Mode {
     Edit(UserData),
 }
 
-pub fn create_fomular() {
+pub fn create_formular() {
     let mut user = UserData::new();
 
-    user = fill_fomular(Mode::Create(user));
+    user = fill_formular(Mode::Create(user));
     let user_name = user.get_data_name().to_string();
 
     let db_user = Db::User(user);
@@ -25,14 +22,14 @@ pub fn create_fomular() {
     println!("The user {} was created.", user_name);
 }
 
-pub fn edit_fomular() {
+pub fn edit_formular() {
     let user_id = select_user();
     let user = get_user(user_id);
 
     let db_user = Db::User(user);
     let target_user = db_user.delete();
 
-    let edited_user = fill_fomular(Mode::Edit(target_user));
+    let edited_user = fill_formular(Mode::Edit(target_user));
     let user_name = edited_user.get_data_name().to_string();
     let new_db_user = Db::User(edited_user);
     new_db_user.save();
@@ -77,7 +74,7 @@ fn print_user(user: UserData) {
     println!("\n\n");
 }
 
-fn fill_fomular(mode: Mode) -> UserData {
+fn fill_formular(mode: Mode) -> UserData {
     match mode {
         Mode::Create(mut user) => {
             fill_name(&mut user);
@@ -116,7 +113,7 @@ fn fill_fomular(mode: Mode) -> UserData {
     }
 }
 
-fn generateId(user: &mut UserData) {
+fn generate_id(user: &mut UserData) {
     user.set_data(DataSelector::Id(Uuid::new_v4()));
 }
 

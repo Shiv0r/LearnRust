@@ -1,4 +1,4 @@
-use crate::fomular::*;
+use crate::formular::*;
 use std::io::*;
 
 const INSTRUCTIONS: [&str; 5] = ["create", "edit", "delete", "show", "exit"];
@@ -8,11 +8,11 @@ pub fn select_instruction() -> bool {
 
     match instruction_number {
         1 => {
-            create_fomular();
+            create_formular();
             return true;
         }
         2 => {
-            edit_fomular();
+            edit_formular();
             return true;
         }
         3 => {

@@ -1,12 +1,12 @@
 mod contact;
 mod db;
-mod fomular;
+mod formular;
 mod input;
 mod selector;
 mod user;
 
 use crate::contact::*;
-use crate::fomular::*;
+use crate::formular::*;
 use crate::input::*;
 use crate::selector::*;
 use crate::user::*;
